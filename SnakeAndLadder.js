@@ -7,3 +7,4 @@
 *   @version   : v15.6.0
 ***************************************************************************/
 console.log('Code for Snake and Ladder');
+var playerPosition = 0;
