@@ -6,5 +6,14 @@
 *   @file      : SnakeAndLadder.js
 *   @version   : v15.6.0
 ***************************************************************************/
-console.log('Code for Snake and Ladder');
+console.log('code for Snake and Ladder');
 var playerPosition = 0;
+var number = 0;
+
+rollDice = () => {
+    number = Math.floor(Math.random() * 6) + 1;
+    return number;
+}
+
+var s = rollDice();
+console.log(s);
