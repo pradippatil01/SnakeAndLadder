@@ -7,34 +7,41 @@
 *   @version   : v15.6.0
 ***************************************************************************/
 console.log('code for Snake and Ladder');
-var startPosition  = 0;
+const START_POSITION = 0;
 var number = 0;
 var currentPosition;
-
+const END_POSITION = 100;
+var position = START_POSITION;
 
 var rollDice = () => {
     number = Math.floor(Math.random() * 6) + 1;
-    console.log('dice rolled and value returned ',number)
+    console.log('dice rolled and value returned ', number)
     return number;
 }
 
 var ladder = (diceResult) => {
-    let positon = startPosition  + diceResult;
-    return positon;
+    position = position + diceResult;
+    return position;
 };
 
 
 var snake = (diceResult) => {
-    let positon = startPosition  - diceResult;
-    return positon;
+    position = position - diceResult;
+    if (position < 0) {
+        position = position + diceResult;
+        return position;
+    } else {
+        return position;
+    }
 };
 
-checkPlayerOption = (option) => {
+checkPlayerOption = () => {
+    let option = Math.floor(Math.random() * 3);
     switch (option) {
         case 0:
-            currentPosition = playerPosition;
+            position = position + 0;
             console.log("no play");
-            console.log("updated player positon - " + currentPosition);
+            console.log("updated player positon - " + position);
             break;
         case 1:
             currentPosition = ladder(rollDice());
@@ -50,5 +57,7 @@ checkPlayerOption = (option) => {
     }
 }
 
-let option = Math.floor(Math.random() * 3);
-checkPlayerOption(option);
+while (position < END_POSITION) {
+    checkPlayerOption();
+    console.log('player position ', position);
+}
