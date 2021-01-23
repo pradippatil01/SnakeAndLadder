@@ -9,13 +9,14 @@
 console.log('code for Snake and Ladder');
 const START_POSITION = 0;
 var number = 0;
+var diceValue;
 var currentPosition;
 const END_POSITION = 100;
 var position = START_POSITION;
 
 var rollDice = () => {
-    number = Math.floor(Math.random() * 6) + 1;
-    return number;
+    diceValue = Math.floor(Math.random() * 6) + 1;
+    return diceValue;
 }
 
 var ladder = (diceResult) => {
@@ -52,6 +53,9 @@ while (position < END_POSITION) {
     checkPlayerOption();
     if (position < START_POSITION) {
         position = START_POSITION;
+    }
+    if (position > END_POSITION) {
+        position = position - diceValue;
     }
     console.log('player position ', position);
 }
