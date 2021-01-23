@@ -15,25 +15,19 @@ var position = START_POSITION;
 
 var rollDice = () => {
     number = Math.floor(Math.random() * 6) + 1;
-    console.log('dice rolled and value returned ', number)
     return number;
 }
 
 var ladder = (diceResult) => {
     position = position + diceResult;
     return position;
-};
+}
 
 
 var snake = (diceResult) => {
     position = position - diceResult;
-    if (position < 0) {
-        position = position + diceResult;
-        return position;
-    } else {
-        return position;
-    }
-};
+    return position;
+}
 
 checkPlayerOption = () => {
     let option = Math.floor(Math.random() * 3);
@@ -41,17 +35,14 @@ checkPlayerOption = () => {
         case 0:
             position = position + 0;
             console.log("no play");
-            console.log("updated player positon - " + position);
             break;
         case 1:
             currentPosition = ladder(rollDice());
             console.log("woww ladder");
-            console.log("updated player positon - " + currentPosition);
             break;
         case 2:
             currentPosition = snake(rollDice());
             console.log("oops snake ");
-            console.log("updated player positon - " + currentPosition);
             break;
 
     }
@@ -59,5 +50,8 @@ checkPlayerOption = () => {
 
 while (position < END_POSITION) {
     checkPlayerOption();
+    if (position < START_POSITION) {
+        position = START_POSITION;
+    }
     console.log('player position ', position);
 }
