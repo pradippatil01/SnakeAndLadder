@@ -23,7 +23,7 @@ class SnakeAndLadder {
         return diceValue;
     }
     /** 
-     *  @param {checkPlayerOption} check playing option
+     *  @method checkPlayerOption check playing option
      *  @param '0' for no play
      *  @param '1' for ladder
      *  @param '2' for snake
@@ -43,28 +43,26 @@ class SnakeAndLadder {
         return position;
     }
     /**
-     * @param {twoPlayerPlay} switch player as per turn 
+     * @method twoPlayerPlay switch player as per turn 
      */
     twoPlayerPlay = () => {
-        if (playerChange == true) {
+        if (playerChange) {
             player1_Position = this.playRule();
             position = player2_position;
-            playerChange = false;
             console.log("Player 1 Position:-  " + player1_Position);
 
         }
-        if (!playerChange) {
+        else {
             player2_position = this.playRule();
             position = player1_Position;
-            playerChange = true;
             console.log("Player 2 Position:-  " + player2_position);
         }
     }
     /**
-     * @param {playRule} playing rule defined 
+     * @method playRule playing rule defined 
      */
     playRule = () => {
-        this.checkPlayerOption()
+        position=this.checkPlayerOption()
         if (position < START_POSITION) {
             position = START_POSITION;
         }
@@ -75,21 +73,28 @@ class SnakeAndLadder {
     }
 
     /**
-     * @param {startGame} main function where playing start
+     * @method startGame main function where playing start
      */
     startGame = () => {
-        while (position < END_POSITION) {
+        while (player1_Position < END_POSITION&&player2_position<END_POSITION) {
             this.twoPlayerPlay();
+            if(playerChange==true){
+                playerChange=false;
+            }else{
+                playerChange=true;
+            }
         }
         if (player1_Position == END_POSITION) {
             console.log("Player One Wins  " + player1_Position);
         }
-        else if (player2_position == END_POSITION) {
+        if (player2_position == END_POSITION) {
             console.log("Player Two Wins  " + player2_position);
         }
         console.log('for winnig dice rolled ' + diceRollCount + ' times');
     }
 }
-let snakeandladder = new SnakeAndLadder();
-snakeandladder.startGame();
+
+
+module.exports = new SnakeAndLadder();
+
 
